@@ -9,8 +9,16 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+	
     ui->setupUi(this);
-	generator g;
+	try {
+		generator g;
+	}
+	catch (std::string w)
+	{
+
+		std::cout << w;
+	}
 }
 
 MainWindow::~MainWindow()
@@ -26,28 +34,23 @@ void MainWindow::on_pushButton_clicked()
      ui->label->setText(text1);
 }
 
-
-generator::generator()
+void generator::wczytanie()
 {
-    _finddata_t danePliku;
-    std::string b = "imiona/", linia;
-    long long uchwyt = _findfirst("imiona/*.txt", &danePliku);
-    int SzukamDalej = 1;
-    int i = 0,j=0;
+	_finddata_t danePliku;
+	std::string b = "imiona/", linia="";
+	long long uchwyt = _findfirst("imiona/*.txt", &danePliku);
+	int SzukamDalej = 1;
 	if (uchwyt != -1)
 	{
 		while (SzukamDalej != -1)
 		{
-			i++;
 			std::ifstream plik;	//
-			plik.open(b + danePliku.name, std::ios::in);
-			if (plik.good()) {
+			plik.open(b + danePliku.name, std::ios::in);//proba otwarcia pliku
+			if (plik.good()) {//jesli otwarto
 				tablicaPlikow.push_back(danePliku.name);
 				std::vector< std::string> tmp;
 				while (std::getline(plik, linia)) {
-					//std::cout << "\t" << linia << "\n";
 					tmp.push_back(linia);
-					j++;
 				}
 				tablicaImion.push_back(tmp);
 				plik.close();
@@ -59,17 +62,33 @@ generator::generator()
 
 		_findclose(uchwyt);
 	}
+	else
+	{
+		std::string wyjatek = "Nie udalo sie wczytac imion\n"; 
+		throw wyjatek;
+	}
+}
+
+generator::generator()
+{
+	wczytanie();
 }
 
 std::string generator::losowanie()
 {
     srand(time(NULL));
-    int a, b;
-    a=rand()%tablicaPlikow.size();
-    b = rand() % tablicaImion[a].size();
-    std::cout << a << "\t" << b << "\n";
-    return tablicaImion[a][b];
-
+    int a=0, b=0;
+    //std::cout << a << "\t" << b << "\n";
+	if (tablicaPlikow.size() != 0 && tablicaImion[a].size() != 0) {
+		a = rand() % tablicaPlikow.size();
+		b = rand() % tablicaImion[a].size();
+		return tablicaImion[a][b];
+	}
+	else
+	{
+		std::string wyjatek = "Nie udalo sie wylosowac imiona\n";
+		throw wyjatek;
+	}
 }
 
 

@@ -16,8 +16,9 @@ private:
 	std::vector<std::string> tablicaPlikow;
 	std::vector<std::vector<std::string>> tablicaImion;
 public:
-	generator();
-	std::string losowanie();
+	generator();//konstruktor bezparametrowy (wczytanie wszystkich plikow)
+	void wczytanie();
+	std::string losowanie();//zwracajaca jedno slowo wylosowane
 	~generator();
 };
 
