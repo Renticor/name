@@ -11,12 +11,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 	
     ui->setupUi(this);
+	generator g;
 	try {
-		generator g;
+		g.wczytanie();
 	}
 	catch (std::string w)
 	{
-
 		std::cout << w;
 	}
 }
@@ -71,7 +71,6 @@ void generator::wczytanie()
 
 generator::generator()
 {
-	wczytanie();
 }
 
 std::string generator::losowanie()
@@ -79,7 +78,8 @@ std::string generator::losowanie()
     srand(time(NULL));
     int a=0, b=0;
     //std::cout << a << "\t" << b << "\n";
-	if (tablicaPlikow.size() != 0 && tablicaImion[a].size() != 0) {
+	if (tablicaPlikow.size() != 0 ) //sprawdzanie czy dlugosc wektora jest wiekszy od zera
+	{
 		a = rand() % tablicaPlikow.size();
 		b = rand() % tablicaImion[a].size();
 		return tablicaImion[a][b];
@@ -87,7 +87,8 @@ std::string generator::losowanie()
 	else
 	{
 		std::string wyjatek = "Nie udalo sie wylosowac imiona\n";
-		throw wyjatek;
+		/*throw wyjatek;*/
+		return wyjatek;
 	}
 }
 
