@@ -1,27 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
 #include <QMainWindow>
-#include <string>
-#include <vector>
+#include "generator.h"
 
 namespace Ui {
 class MainWindow;
 }
-
-
-class generator
-{
-private:
-	std::vector<std::string> tablicaPlikow;
-	std::vector<std::vector<std::string>> tablicaImion;
-public:
-	generator();//konstruktor bezparametrowy (wczytanie wszystkich plikow)
-	void wczytanie();
-	std::string losowanie();//zwracajaca jedno slowo wylosowane
-	~generator();
-};
-
 
 class MainWindow : public QMainWindow
 {
