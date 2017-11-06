@@ -21,5 +21,6 @@ void MainWindow::on_pushButton_clicked()
     std::string text= g.losowanie();
    QString textQt=QString::fromStdString(text);
      ui->label->setText(textQt);
+
 }
 

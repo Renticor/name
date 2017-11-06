@@ -7,7 +7,17 @@
 /*******************************************************************/
 generator::generator(){}
 /*******************************************************************/
-generator::~generator(){}
+generator::~generator()
+{
+
+for(int i=0 ; i<tablicaImion.size();i++)
+{ 
+	tablicaImion[i].clear();
+}
+tablicaImion.clear();
+tablicaPlikow.clear();
+
+}
 /*******************************************************************/
 void generator::wczytanie()
 {

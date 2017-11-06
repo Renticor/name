@@ -1,3 +1,10 @@
+/*
+Program losujacy imie
+Leszek Samburski
+Projekt 1
+Listopad 2017
+*/
+
 #pragma once
 #ifndef GENERATOR_H
 #define GENERATOR_H
